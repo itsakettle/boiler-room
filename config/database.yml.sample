@@ -1,0 +1,13 @@
+development:
+  adapter: postgresql
+  database: boiler-room-dev
+  pool: 5
+  username:
+  password:
+  
+production:
+  adapter: postgresql
+  database: boiler-room-prod
+  pool: 5
+  username: 
+  password:
