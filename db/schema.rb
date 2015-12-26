@@ -16,38 +16,38 @@ ActiveRecord::Schema.define(version: 1) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "observations", force: :cascade do |t|
-    t.integer  "projects_id"
-    t.string   "text_data"
+  create_table "choices", force: :cascade do |t|
+    t.integer  "project_id"
+    t.string   "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
-  add_index "observations", ["projects_id"], name: "index_observations_on_projects_id", using: :btree
+  add_index "choices", ["project_id"], name: "index_choices_on_project_id", using: :btree
 
-  create_table "observations_classifications", force: :cascade do |t|
-    t.integer  "observations_id"
-    t.integer  "projects_choices_id"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+  create_table "classifications", force: :cascade do |t|
+    t.integer  "observation_id"
+    t.integer  "choice_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
-  add_index "observations_classifications", ["observations_id"], name: "index_observations_classifications_on_observations_id", using: :btree
-  add_index "observations_classifications", ["projects_choices_id"], name: "index_observations_classifications_on_projects_choices_id", using: :btree
+  add_index "classifications", ["choice_id"], name: "index_classifications_on_choice_id", using: :btree
+  add_index "classifications", ["observation_id"], name: "index_classifications_on_observation_id", using: :btree
+
+  create_table "observations", force: :cascade do |t|
+    t.integer  "project_id"
+    t.string   "text_data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "observations", ["project_id"], name: "index_observations_on_project_id", using: :btree
 
   create_table "projects", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
-  create_table "projects_choices", force: :cascade do |t|
-    t.integer  "projects_id"
-    t.string   "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  add_index "projects_choices", ["projects_id"], name: "index_projects_choices_on_projects_id", using: :btree
 
 end

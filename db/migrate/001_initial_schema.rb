@@ -5,21 +5,21 @@ class InitialSchema < ActiveRecord::Migration
       t.timestamps null: false
     end
     
-      create_table :projects_choices do |t|
-        t.belongs_to :projects, index:true
+      create_table :choices do |t|
+        t.belongs_to :project, index:true
         t.string :description
         t.timestamps null: false
       end
     
       create_table :observations do |t|
-        t.belongs_to :projects, index:true
+        t.belongs_to :project, index:true
         t.string :text_data
         t.timestamps null: false
     end
     
-      create_table :observations_classifications do |t|
-        t.belongs_to :observations, index:true
-        t.belongs_to :projects_choices, index:true
+      create_table :classifications do |t|
+        t.belongs_to :observation, index:true
+        t.belongs_to :choice, index:true
         t.timestamps null: false
     end
     
