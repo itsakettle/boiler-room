@@ -10,7 +10,7 @@ BoilerRoomAPI.run! do |server|
     :cert_chain_file => settings['cert_chain_file'],
     :verify_peer => false
   }
-  server.ssl = false
+  server.ssl = true
   server.ssl_options = ssl_options
 end
 
