@@ -1,15 +1,37 @@
 require 'sinatra'
 require 'sinatra/activerecord'
 require 'json'
+require 'thin'
 # Require all the models
 require './models.rb'
 
 class BoilerRoomAPI < Sinatra::Base
   
-  settings = YAML.load_file('./config/settings.yml')
+  app_settings = YAML.load_file('./config/settings.yml')
+    
+  configure do
+      set :bind, '0.0.0.0'
+      set :port, 9000
+    end
+  
+  def self.run!
+    # Need to load this again cause it's in a block in a method I suppose
+    app_settings = YAML.load_file('./config/settings.yml')
+    
+    my_ssl_options = {
+        :cert_chain_file  => app_settings['cert_chain_file'],
+        :private_key_file => app_settings['private_key_file'],
+        :verify_peer      => false
+      }
+    
+    super do |server|
+      server.ssl = true
+      server.ssl_options = my_ssl_options
+    end
+  end
   
   use Rack::Auth::Basic, "Restricted Area" do |username, password|
-    username == settings['username'] and password == settings['password']
+    username == app_settings['username'] and password == app_settings['password']
   end
   
   # Just accept json
