@@ -11,7 +11,7 @@ class BoilerRoomAPI < Sinatra::Base
     
   configure do
       set :bind, '0.0.0.0'
-      set :port, 9000
+      set :port, 443
     end
   
   def self.run!
