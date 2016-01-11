@@ -1,2 +1,2 @@
 require './app'
-BoilerRoomAPI.run!
+run BoilerRoomAPI
