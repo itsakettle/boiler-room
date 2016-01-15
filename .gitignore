@@ -38,3 +38,6 @@ build/
 database.yml
 # settings config
 settings.yml
+
+# log files
+*.log
