@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 1) do
 
   create_table "observations", force: :cascade do |t|
     t.integer  "project_id"
+    t.string   "identifier"
     t.string   "text_data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

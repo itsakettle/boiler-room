@@ -24,8 +24,8 @@ namespace :projects do
   end
   
   desc 'Add an observation to a project'
-  task :add_observation, [:project_id, :text_data] do |t, args|
-    ob = Observation.new(text_data: args[:text_data])
+  task :add_observation, [:project_id, :identifier, :text_data] do |t, args|
+    ob = Observation.new(identifier: args[:identifier], text_data: args[:text_data])
     ob.project = Project.find_by(id: args[:project_id].to_i)
     ob.save
   end

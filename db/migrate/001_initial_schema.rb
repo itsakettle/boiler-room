@@ -13,6 +13,7 @@ class InitialSchema < ActiveRecord::Migration
     
       create_table :observations do |t|
         t.belongs_to :project, index:true
+        t.string :identifier
         t.string :text_data
         t.timestamps null: false
     end
